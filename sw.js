@@ -11,6 +11,7 @@ self.addEventListener("push", evt => {
   self.registration.showNotification(data.title, {
     body: data.body,
     icon: data.icon,
-    image: data.image
+    image: data.image,
+    badge: data.badge,
   });
 });

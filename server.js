@@ -34,7 +34,16 @@ app.post("/mypush", (req, res) => {
     title: "Welcome!",
     body: "Yes, it works!",
     icon: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-    image: "https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
+    image: "https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg",
+    badge:"https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+    actions: [
+        {
+          action: 'link',
+          type: 'button',
+          title: 'show',
+          icon: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+        },
+      ],
   }))
   .catch(err => console.log(err));
 });
