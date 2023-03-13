@@ -10,22 +10,63 @@
     <button onclick="subscribe()">Subscribe</button>
 
     <script>
-      async function subscribe() {
-        let sw = await navigator.serviceWorker.ready;
-        let push = await sw.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey:
-            'BNI5je6xNZrNsgOJ08ipNEkxiNL4-JvqYcv0AN1qA3A2w_lwITYymCbq__J4V85D5Th-kKE92SL5Y_F04uHQP5E'
+      // (A) OBTAIN USER PERMISSION TO SHOW NOTIFICATION
+      window.onload = () => {
+        // (A1) ASK FOR PERMISSION
+        if (Notification.permission === "default") {
+          Notification.requestPermission().then(perm => {
+            if (Notification.permission === "granted") {
+              regWorker().catch(err => console.error(err));
+            } else {
+              alert("Please allow notifications.");
+            }
+          });
+        }
+      
+        // (A2) GRANTED
+        else if (Notification.permission === "granted") {
+          regWorker().catch(err => console.error(err));
+        }
+      
+        // (A3) DENIED
+        else { alert("Please allow notifications."); }
+      };
+
+
+
+      // (B) REGISTER SERVICE WORKER
+      async function regWorker () {
+        // (B1) YOUR PUBLIC KEY - CHANGE TO YOUR OWN!
+        const publicKey = "YOUR-PUBLIC-KEY";
+      
+        // (B2) REGISTER SERVICE WORKER
+        navigator.serviceWorker.register("4-sw.js", { scope: "/" });
+      
+        // (B3) SUBSCRIBE TO PUSH SERVER
+        navigator.serviceWorker.ready
+        .then(reg => {
+          reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: publicKey
+          }).then(
+            // (B3-1) OK - TEST PUSH NOTIFICATION
+            sub => {
+              fetch("/mypush", {
+                method: "POST",
+                body: JSON.stringify(sub),
+                headers: { "content-type": "application/json" }
+              })
+              .then(res => res.text())
+              .then(txt => console.log(txt))
+              .catch(err => console.error(err));
+            },
+      
+            // (B3-2) ERROR!
+            err => console.error(err)
+          );
         });
-        console.log(JSON.stringify(push));
       }
 
-      if ('serviceWorker' in navigator) {
-        addEventListener('load', async () => {
-          let sw = await navigator.serviceWorker.register('./sw.js');
-          console.log(sw);
-        });
-      }
     </script>
   </body>
 </html>

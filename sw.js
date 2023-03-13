@@ -1,10 +1,16 @@
-let data = event.data.json();
-const image = 'https://cdn.glitch.com/614286c9-b4fc-4303-a6a9-a4cef0601b74%2Flogo.png?v=1605150951230';
-const options = {
-  body: data.options.body,
-  icon: image
-}
-self.registration.showNotification(
-  data.title, 
-  options
-);
+// (A) INSTANT WORKER ACTIVATION
+self.addEventListener("install", evt => self.skipWaiting());
+ 
+// (B) CLAIM CONTROL INSTANTLY
+self.addEventListener("activate", evt => self.clients.claim());
+ 
+// (C) LISTEN TO PUSH
+self.addEventListener("push", evt => {
+  const data = evt.data.json();
+  // console.log("Push", data);
+  self.registration.showNotification(data.title, {
+    body: data.body,
+    icon: data.icon,
+    image: data.image
+  });
+});
