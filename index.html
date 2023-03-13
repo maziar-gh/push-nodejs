@@ -7,8 +7,6 @@
     <title>Document</title>
   </head>
   <body>
-    <button onclick="subscribe()">Subscribe</button>
-
     <script>
       // (A) OBTAIN USER PERMISSION TO SHOW NOTIFICATION
       window.onload = () => {
@@ -37,10 +35,10 @@
       // (B) REGISTER SERVICE WORKER
       async function regWorker () {
         // (B1) YOUR PUBLIC KEY - CHANGE TO YOUR OWN!
-        const publicKey = "YOUR-PUBLIC-KEY";
+        const publicKey = "BJztwj9VH5ri7YbfJDTxz2qR3zObHc_rWq3ktzXo2ugU_NFTrhBG6yFxW3tUcYdj24-Mci_dVU1mEdX874aKlTI";
       
         // (B2) REGISTER SERVICE WORKER
-        navigator.serviceWorker.register("4-sw.js", { scope: "/" });
+        navigator.serviceWorker.register("sw.js", { scope: "/" });
       
         // (B3) SUBSCRIBE TO PUSH SERVER
         navigator.serviceWorker.ready
