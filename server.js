@@ -14,8 +14,8 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 
-var pk  = fs.readFileSync('selfsigned.key', 'utf8');
-var cr = fs.readFileSync('selfsigned.crt', 'utf8');
+var pk  = fs.readFileSync('/etc/letsencrypt/live/server.gilace.ir/privkey.pem', 'utf8');
+var cr = fs.readFileSync('/etc/letsencrypt/live/server.gilace.ir/fullchain.pem', 'utf8');
 var credentials = {key: pk, cert: cr};
  
 // (C) SETUP SERVER
