@@ -46,5 +46,9 @@ app.post("/mypush", (req, res) => {
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(8080);
-httpsServer.listen(8443);
+httpServer.listen(8080, () => {
+    console.log("httpServer is runing at port 8080");
+  });
+httpsServer.listen(8443, () => {
+    console.log("httpsServer is runing at port 8443");
+  });
