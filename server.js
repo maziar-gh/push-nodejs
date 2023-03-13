@@ -8,6 +8,7 @@ const port = 80,
 const express = require("express"),
       bodyParser = require("body-parser"),
       path = require("path"),
+      https = require("https"),
       webpush = require("web-push");
  
 // (C) SETUP SERVER
@@ -32,4 +33,18 @@ app.post("/mypush", (req, res) => {
 });
  
 // (F) START!
-app.listen(port, () => console.log(`Server deployed at ${port}`));
+//app.listen(port, () => console.log(`Server deployed at ${port}`));
+
+https
+  .createServer(
+		// Provide the private and public key to the server by reading each
+		// file's content with the readFileSync() method.
+    {
+      key: fs.readFileSync("key.pem"),
+      cert: fs.readFileSync("cert.pem"),
+    },
+    app
+  )
+  .listen(443, () => {
+    console.log("serever is runing at port 443");
+  });
