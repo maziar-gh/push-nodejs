@@ -11,7 +11,7 @@ const express = require("express"),
       https = require("https"),
       webpush = require("web-push");
 
-const fs = request("fs");
+const fs = require("fs");
  
 // (C) SETUP SERVER
 webpush.setVapidDetails("mailto:" + mail, publicKey, privateKey);
