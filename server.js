@@ -14,8 +14,8 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 
-var pk  = fs.readFileSync('key.pem', 'utf8');
-var cr = fs.readFileSync('cert.pem', 'utf8');
+var pk  = fs.readFileSync('selfsigned.key', 'utf8');
+var cr = fs.readFileSync('selfsigned.crt', 'utf8');
 var credentials = {key: pk, cert: cr};
  
 // (C) SETUP SERVER
