@@ -16,6 +16,6 @@ var vapidKeys = {
   );
   
   // This is the same output of calling JSON.stringify on a PushSubscription
-  const pushSubscription = {"endpoint":"https://fcm.googleapis.com/fcm/send/f52s-o4f7uk:APA91bGBJOcUZU413FjxCwEZEuYSmfQiaVwTkMFj-gPO7xfVe3IeShMDBNRCuasImoCXhVP7hd28pKDPZ9UkAsAE49xncbpp-GEyFWMFI8Tm8kbtdwFoz3vPctqJm2H6IVXYoAsLDxMi","expirationTime":null,"keys":{"p256dh":"BJTedR4NCnOLYCP7m8UvzT6_evAgWEh5yjgDbOCtCxJAcXygDVv6RjLGyfLernQ3XcefhjjesvhLgikbn0XeDRE","auth":"HBCjFOBL4XzMV_nkIPPjDw"}};
+  const pushSubscription = {"endpoint":"https://updates.push.services.mozilla.com/wpush/v2/gAAAAABkD…mL4CH8E82hLGmVR2-0Zbrh6gJIPqe1wn-j3JPK9pqgHe1T-1r0pcWTT1_9CU","expirationTime":null,"keys":{"auth":"gbfYECst9atPzbzrICusug","p256dh":"BI3jj5yAaCbX-4-tpSByYEFoO8IviG_dT7E3JkXyjLMAbI33CiARuABHiscsdV_hi6Q1ivX276ijBg3hAlzdGZ0"}};
   
   webpush.sendNotification(pushSubscription, 'Your Push Payload Text');
