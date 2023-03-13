@@ -8,10 +8,15 @@ const port = 80,
 const express = require("express"),
       bodyParser = require("body-parser"),
       path = require("path"),
-      https = require("https"),
       webpush = require("web-push");
 
-const fs = require("fs");
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+
+var pk  = fs.readFileSync('key.pem', 'utf8');
+var cr = fs.readFileSync('cert.pem', 'utf8');
+var credentials = {key: pk, cert: cr};
  
 // (C) SETUP SERVER
 webpush.setVapidDetails("mailto:" + mail, publicKey, privateKey);
@@ -37,16 +42,9 @@ app.post("/mypush", (req, res) => {
 // (F) START!
 //app.listen(port, () => console.log(`Server deployed at ${port}`));
 
-https
-  .createServer(
-		// Provide the private and public key to the server by reading each
-		// file's content with the readFileSync() method.
-    {
-      key: fs.readFileSync("key.pem"),
-      cert: fs.readFileSync("cert.pem"),
-    },
-    app
-  )
-  .listen(443, () => {
-    console.log("serever is runing at port 443");
-  });
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(8080);
+httpsServer.listen(8443);
